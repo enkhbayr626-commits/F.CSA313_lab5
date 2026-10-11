@@ -1,0 +1,721 @@
+newman
+
+Lab05 — С. Энхбаяр B232270153
+
+❏ TC01 — Урьдач нөхцөл хангасан идэвхтэй оюутан
+↳ Setup — B232270153 оюутан
+  PUT http://localhost:3000/students/B232270153 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+  2. HTTP статус 200
+  3. result OK
+
+↳ Setup — CS313 хичээл
+  PUT http://localhost:3000/courses/CS313 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+  5. HTTP статус 200
+  6. result OK
+
+↳ Урьдач нөхцөл хангасан идэвхтэй оюутан → OK
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+  8. HTTP статус 201
+  9. result OK
+ 10. registrationID тоо
+
+❏ TC02 — Оюутан байхгүй
+↳ Setup — CS313_TC02 хичээл
+  PUT http://localhost:3000/courses/CS313_TC02 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 12. HTTP статус 200
+ 13. result OK
+
+↳ Оюутан байхгүй → ERROR_NO_STUDENT
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 15. HTTP статус 200
+ 16. result ERROR_NO_STUDENT
+
+❏ TC03 — Идэвхгүй оюутан
+↳ Setup — B232270153_TC03 оюутан
+  PUT http://localhost:3000/students/B232270153_TC03 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 18. HTTP статус 200
+ 19. result OK
+
+↳ Setup — CS313_TC03 хичээл
+  PUT http://localhost:3000/courses/CS313_TC03 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 21. HTTP статус 200
+ 22. result OK
+
+↳ Идэвхгүй оюутан → ERROR_INACTIVE_STUDENT
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 24. HTTP статус 200
+ 25. result ERROR_INACTIVE_STUDENT
+
+❏ TC04 — Хичээл байхгүй
+↳ Setup — B232270153_TC04 оюутан
+  PUT http://localhost:3000/students/B232270153_TC04 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 27. HTTP статус 200
+ 28. result OK
+
+↳ Хичээл байхгүй → ERROR_NO_COURSE
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 30. HTTP статус 200
+ 31. result ERROR_NO_COURSE
+
+❏ TC05 — Урьдач нөхцөлийг огт хангаагүй
+↳ Setup — B232270153_TC05 оюутан
+  PUT http://localhost:3000/students/B232270153_TC05 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 33. HTTP статус 200
+ 34. result OK
+
+↳ Setup — CS313_TC05 хичээл
+  PUT http://localhost:3000/courses/CS313_TC05 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 36. HTTP статус 200
+ 37. result OK
+
+↳ Урьдач нөхцөлийг огт хангаагүй → ERROR_PREREQUISITES
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 39. HTTP статус 200
+ 40. result ERROR_PREREQUISITES
+ 41. Дутуу урьдач нөхцөл зөв
+
+❏ TC06 — Урьдач нөхцөлийг хэсэгчлэн хангасан
+↳ Setup — B232270153_TC06 оюутан
+  PUT http://localhost:3000/students/B232270153_TC06 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 43. HTTP статус 200
+ 44. result OK
+
+↳ Setup — CS313_TC06 хичээл
+  PUT http://localhost:3000/courses/CS313_TC06 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 46. HTTP статус 200
+ 47. result OK
+
+↳ Урьдач нөхцөлийг хэсэгчлэн хангасан → ERROR_PREREQUISITES
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 49. HTTP статус 200
+ 50. result ERROR_PREREQUISITES
+ 51. Дутуу урьдач нөхцөл зөв
+
+❏ TC07 — Оюутан ба хичээл хоёулаа байхгүй
+↳ Оюутан ба хичээл хоёулаа байхгүй → ERROR_NO_STUDENT
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 53. HTTP статус 200
+ 54. result ERROR_NO_STUDENT
+
+❏ TC08 — Идэвхгүй оюутан ба байхгүй хичээл
+↳ Setup — B232270153_TC08 оюутан
+  PUT http://localhost:3000/students/B232270153_TC08 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 56. HTTP статус 200
+ 57. result OK
+
+↳ Идэвхгүй оюутан ба байхгүй хичээл → ERROR_INACTIVE_STUDENT
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 59. HTTP статус 200
+ 60. result ERROR_INACTIVE_STUDENT
+
+❏ TC09 — Үзсэн хичээлгүй ба урьдач нөхцөлгүй
+↳ Setup — B232270153_TC09 оюутан
+  PUT http://localhost:3000/students/B232270153_TC09 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 62. HTTP статус 200
+ 63. result OK
+
+↳ Setup — CS313_TC09 хичээл
+  PUT http://localhost:3000/courses/CS313_TC09 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 65. HTTP статус 200
+ 66. result OK
+
+↳ Үзсэн хичээлгүй ба урьдач нөхцөлгүй → OK
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 68. HTTP статус 201
+ 69. result OK
+ 70. registrationID тоо
+
+❏ TC10 — studentID талбар дутуу
+↳ Setup — B232270153_TC10 оюутан
+  PUT http://localhost:3000/students/B232270153_TC10 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 72. HTTP статус 200
+ 73. result OK
+
+↳ Setup — CS313_TC10 хичээл
+  PUT http://localhost:3000/courses/CS313_TC10 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 75. HTTP статус 200
+ 76. result OK
+
+↳ studentID талбар дутуу → ERROR_BAD_REQUEST
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 78. HTTP статус 400
+ 79. result ERROR_BAD_REQUEST
+
+❏ TC11 — courseID талбар дутуу
+↳ Setup — B232270153_TC11 оюутан
+  PUT http://localhost:3000/students/B232270153_TC11 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 81. HTTP статус 200
+ 82. result OK
+
+↳ Setup — CS313_TC11 хичээл
+  PUT http://localhost:3000/courses/CS313_TC11 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 84. HTTP статус 200
+ 85. result OK
+
+↳ courseID талбар дутуу → ERROR_BAD_REQUEST
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 87. HTTP статус 400
+ 88. result ERROR_BAD_REQUEST
+
+❏ TC12 — Буруу JSON
+↳ Setup — B232270153_TC12 оюутан
+  PUT http://localhost:3000/students/B232270153_TC12 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 90. HTTP статус 200
+ 91. result OK
+
+↳ Setup — CS313_TC12 хичээл
+  PUT http://localhost:3000/courses/CS313_TC12 [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 93. HTTP статус 200
+ 94. result OK
+
+↳ Буруу JSON → ERROR_BAD_JSON
+  POST http://localhost:3000/registrations [errored]
+     connect ECONNREFUSED 127.0.0.1:3000
+ 96. HTTP статус 400
+ 97. result ERROR_BAD_JSON
+
+❏ Public API
+↳ JSONPlaceholder — Хэрэглэгчдийн жагсаалт
+  GET https://jsonplaceholder.typicode.com/users [200 OK, 6.6kB, 112ms]
+  ✓  HTTP статус 200
+  ✓  Хариу массив
+  ✓  Эхний хэрэглэгчийн нэр зөв
+
+┌─────────────────────────┬───────────────────┬───────────────────┐
+│                         │          executed │            failed │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│              iterations │                 1 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│                requests │                32 │                31 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│            test-scripts │                32 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│      prerequest-scripts │                 0 │                 0 │
+├─────────────────────────┼───────────────────┼───────────────────┤
+│              assertions │                69 │                66 │
+├─────────────────────────┴───────────────────┴───────────────────┤
+│ total run duration: 895ms                                       │
+├─────────────────────────────────────────────────────────────────┤
+│ total data received: 5.65kB (approx)                            │
+├─────────────────────────────────────────────────────────────────┤
+│ average response time: 3ms [min: 112ms, max: 112ms, s.d.: 19ms] │
+└─────────────────────────────────────────────────────────────────┘
+
+[31m   # [39m[31m failure        [39m[31m detail                                                                                                          [39m
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 01.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 02.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC01 — Урьдач нөхцөл хангасан идэвхтэй оюутан / Setup — B232270153 оюутан"                              
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 03.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC01 — Урьдач нөхцөл хангасан идэвхтэй оюутан / Setup — B232270153 оюутан"                              
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 04.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 05.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC01 — Урьдач нөхцөл хангасан идэвхтэй оюутан / Setup — CS313 хичээл"                                   
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 06.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC01 — Урьдач нөхцөл хангасан идэвхтэй оюутан / Setup — CS313 хичээл"                                   
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 07.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 08.  AssertionError  HTTP статус 201                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC01 — Урьдач нөхцөл хангасан идэвхтэй оюутан / Урьдач нөхцөл хангасан идэвхтэй оюутан → OK"            
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 09.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC01 — Урьдач нөхцөл хангасан идэвхтэй оюутан / Урьдач нөхцөл хангасан идэвхтэй оюутан → OK"            
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 10.  JSONError       registrationID тоо                                                                                              
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:2 in test-script                                                                                   
+                      inside "TC01 — Урьдач нөхцөл хангасан идэвхтэй оюутан / Урьдач нөхцөл хангасан идэвхтэй оюутан → OK"            
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 11.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 12.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC02 — Оюутан байхгүй / Setup — CS313_TC02 хичээл"                                                      
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 13.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC02 — Оюутан байхгүй / Setup — CS313_TC02 хичээл"                                                      
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 14.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 15.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC02 — Оюутан байхгүй / Оюутан байхгүй → ERROR_NO_STUDENT"                                              
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 16.  JSONError       result ERROR_NO_STUDENT                                                                                         
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC02 — Оюутан байхгүй / Оюутан байхгүй → ERROR_NO_STUDENT"                                              
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 17.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 18.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC03 — Идэвхгүй оюутан / Setup — B232270153_TC03 оюутан"                                                
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 19.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC03 — Идэвхгүй оюутан / Setup — B232270153_TC03 оюутан"                                                
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 20.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 21.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC03 — Идэвхгүй оюутан / Setup — CS313_TC03 хичээл"                                                     
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 22.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC03 — Идэвхгүй оюутан / Setup — CS313_TC03 хичээл"                                                     
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 23.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 24.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC03 — Идэвхгүй оюутан / Идэвхгүй оюутан → ERROR_INACTIVE_STUDENT"                                      
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 25.  JSONError       result ERROR_INACTIVE_STUDENT                                                                                   
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC03 — Идэвхгүй оюутан / Идэвхгүй оюутан → ERROR_INACTIVE_STUDENT"                                      
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 26.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 27.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC04 — Хичээл байхгүй / Setup — B232270153_TC04 оюутан"                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 28.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC04 — Хичээл байхгүй / Setup — B232270153_TC04 оюутан"                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 29.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 30.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC04 — Хичээл байхгүй / Хичээл байхгүй → ERROR_NO_COURSE"                                               
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 31.  JSONError       result ERROR_NO_COURSE                                                                                          
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC04 — Хичээл байхгүй / Хичээл байхгүй → ERROR_NO_COURSE"                                               
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 32.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 33.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC05 — Урьдач нөхцөлийг огт хангаагүй / Setup — B232270153_TC05 оюутан"                                 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 34.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC05 — Урьдач нөхцөлийг огт хангаагүй / Setup — B232270153_TC05 оюутан"                                 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 35.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 36.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC05 — Урьдач нөхцөлийг огт хангаагүй / Setup — CS313_TC05 хичээл"                                      
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 37.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC05 — Урьдач нөхцөлийг огт хангаагүй / Setup — CS313_TC05 хичээл"                                      
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 38.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 39.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC05 — Урьдач нөхцөлийг огт хангаагүй / Урьдач нөхцөлийг огт хангаагүй → ERROR_PREREQUISITES"           
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 40.  JSONError       result ERROR_PREREQUISITES                                                                                      
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC05 — Урьдач нөхцөлийг огт хангаагүй / Урьдач нөхцөлийг огт хангаагүй → ERROR_PREREQUISITES"           
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 41.  JSONError       Дутуу урьдач нөхцөл зөв                                                                                         
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:2 in test-script                                                                                   
+                      inside "TC05 — Урьдач нөхцөлийг огт хангаагүй / Урьдач нөхцөлийг огт хангаагүй → ERROR_PREREQUISITES"           
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 42.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 43.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC06 — Урьдач нөхцөлийг хэсэгчлэн хангасан / Setup — B232270153_TC06 оюутан"                            
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 44.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC06 — Урьдач нөхцөлийг хэсэгчлэн хангасан / Setup — B232270153_TC06 оюутан"                            
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 45.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 46.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC06 — Урьдач нөхцөлийг хэсэгчлэн хангасан / Setup — CS313_TC06 хичээл"                                 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 47.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC06 — Урьдач нөхцөлийг хэсэгчлэн хангасан / Setup — CS313_TC06 хичээл"                                 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 48.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 49.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC06 — Урьдач нөхцөлийг хэсэгчлэн хангасан / Урьдач нөхцөлийг хэсэгчлэн хангасан → ERROR_PREREQUISITES" 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 50.  JSONError       result ERROR_PREREQUISITES                                                                                      
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC06 — Урьдач нөхцөлийг хэсэгчлэн хангасан / Урьдач нөхцөлийг хэсэгчлэн хангасан → ERROR_PREREQUISITES" 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 51.  JSONError       Дутуу урьдач нөхцөл зөв                                                                                         
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:2 in test-script                                                                                   
+                      inside "TC06 — Урьдач нөхцөлийг хэсэгчлэн хангасан / Урьдач нөхцөлийг хэсэгчлэн хангасан → ERROR_PREREQUISITES" 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 52.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 53.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC07 — Оюутан ба хичээл хоёулаа байхгүй / Оюутан ба хичээл хоёулаа байхгүй → ERROR_NO_STUDENT"          
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 54.  JSONError       result ERROR_NO_STUDENT                                                                                         
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC07 — Оюутан ба хичээл хоёулаа байхгүй / Оюутан ба хичээл хоёулаа байхгүй → ERROR_NO_STUDENT"          
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 55.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 56.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC08 — Идэвхгүй оюутан ба байхгүй хичээл / Setup — B232270153_TC08 оюутан"                              
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 57.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC08 — Идэвхгүй оюутан ба байхгүй хичээл / Setup — B232270153_TC08 оюутан"                              
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 58.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 59.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC08 — Идэвхгүй оюутан ба байхгүй хичээл / Идэвхгүй оюутан ба байхгүй хичээл → ERROR_INACTIVE_STUDENT"  
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 60.  JSONError       result ERROR_INACTIVE_STUDENT                                                                                   
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC08 — Идэвхгүй оюутан ба байхгүй хичээл / Идэвхгүй оюутан ба байхгүй хичээл → ERROR_INACTIVE_STUDENT"  
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 61.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 62.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC09 — Үзсэн хичээлгүй ба урьдач нөхцөлгүй / Setup — B232270153_TC09 оюутан"                            
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 63.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC09 — Үзсэн хичээлгүй ба урьдач нөхцөлгүй / Setup — B232270153_TC09 оюутан"                            
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 64.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 65.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC09 — Үзсэн хичээлгүй ба урьдач нөхцөлгүй / Setup — CS313_TC09 хичээл"                                 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 66.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC09 — Үзсэн хичээлгүй ба урьдач нөхцөлгүй / Setup — CS313_TC09 хичээл"                                 
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 67.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 68.  AssertionError  HTTP статус 201                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC09 — Үзсэн хичээлгүй ба урьдач нөхцөлгүй / Үзсэн хичээлгүй ба урьдач нөхцөлгүй → OK"                  
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 69.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC09 — Үзсэн хичээлгүй ба урьдач нөхцөлгүй / Үзсэн хичээлгүй ба урьдач нөхцөлгүй → OK"                  
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 70.  JSONError       registrationID тоо                                                                                              
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:2 in test-script                                                                                   
+                      inside "TC09 — Үзсэн хичээлгүй ба урьдач нөхцөлгүй / Үзсэн хичээлгүй ба урьдач нөхцөлгүй → OK"                  
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 71.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 72.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC10 — studentID талбар дутуу / Setup — B232270153_TC10 оюутан"                                         
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 73.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC10 — studentID талбар дутуу / Setup — B232270153_TC10 оюутан"                                         
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 74.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 75.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC10 — studentID талбар дутуу / Setup — CS313_TC10 хичээл"                                              
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 76.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC10 — studentID талбар дутуу / Setup — CS313_TC10 хичээл"                                              
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 77.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 78.  AssertionError  HTTP статус 400                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC10 — studentID талбар дутуу / studentID талбар дутуу → ERROR_BAD_REQUEST"                             
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 79.  JSONError       result ERROR_BAD_REQUEST                                                                                        
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC10 — studentID талбар дутуу / studentID талбар дутуу → ERROR_BAD_REQUEST"                             
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 80.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 81.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC11 — courseID талбар дутуу / Setup — B232270153_TC11 оюутан"                                          
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 82.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC11 — courseID талбар дутуу / Setup — B232270153_TC11 оюутан"                                          
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 83.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 84.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC11 — courseID талбар дутуу / Setup — CS313_TC11 хичээл"                                               
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 85.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC11 — courseID талбар дутуу / Setup — CS313_TC11 хичээл"                                               
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 86.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 87.  AssertionError  HTTP статус 400                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC11 — courseID талбар дутуу / courseID талбар дутуу → ERROR_BAD_REQUEST"                               
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 88.  JSONError       result ERROR_BAD_REQUEST                                                                                        
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC11 — courseID талбар дутуу / courseID талбар дутуу → ERROR_BAD_REQUEST"                               
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 89.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 90.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC12 — Буруу JSON / Setup — B232270153_TC12 оюутан"                                                     
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 91.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC12 — Буруу JSON / Setup — B232270153_TC12 оюутан"                                                     
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 92.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 93.  AssertionError  HTTP статус 200                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC12 — Буруу JSON / Setup — CS313_TC12 хичээл"                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 94.  JSONError       result OK                                                                                                       
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC12 — Буруу JSON / Setup — CS313_TC12 хичээл"                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 95.  Error                                                                                                                           
+                      connect ECONNREFUSED 127.0.0.1:3000                                                                             
+                      at request                                                                                                      
+                      inside ""                                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 96.  AssertionError  HTTP статус 400                                                                                                 
+                      expected PostmanResponse{ …(5) } to have property 'code'                                                        
+                      at assertion:0 in test-script                                                                                   
+                      inside "TC12 — Буруу JSON / Буруу JSON → ERROR_BAD_JSON"                                                        
+[90m     [39m[90m                [39m[90m                                                                                                                 [39m
+ 97.  JSONError       result ERROR_BAD_JSON                                                                                           
+                      Unexpected token u in JSON at position 0                                                                        
+                      at assertion:1 in test-script                                                                                   
+                      inside "TC12 — Буруу JSON / Буруу JSON → ERROR_BAD_JSON"                                                        
+
+exit=1
